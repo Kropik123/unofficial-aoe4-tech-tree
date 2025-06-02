@@ -1,5 +1,6 @@
 export type GameEntityAge = 1 | 2 | 3 | 4;
 export type GameEntityType = 'GENERAL' | 'WORKER' | 'MILITARY' | 'TECHNOLOGY' | 'LANDMARK'
+export type CivDifficulty = 1 | 2 | 3
 
 export interface GameEntity {
     id: string,
@@ -11,7 +12,7 @@ export interface GameEntity {
     displayClass: string,
     unique: boolean,
     icon: string,
-    resourceCosts: ResourceCosts,
+    costs: ResourceCosts,
     subEntities: GameEntity[],
 }
 
@@ -27,3 +28,22 @@ export interface ResourceCosts {
     time: number,
 }
 
+export interface YearRange {
+    from: number,
+    to: number,
+}
+
+export interface CivFeature {
+    name: string,
+    description: string,
+}
+
+export interface Civ {
+    id: string,
+    name: string,
+    difficulty: CivDifficulty,
+    yearRange: YearRange,
+    keywords: string[],
+    description: string,
+    features: CivFeature[],
+}

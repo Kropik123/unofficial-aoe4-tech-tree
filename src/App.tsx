@@ -1,6 +1,7 @@
 import './App.css'
 //import {useTwitch} from "./hooks/useTwitch.ts";
-import TechTree from "./components/TechTree/TechTree.component.tsx";
+import CivTree from "./components/CivTree/CivTree.component.tsx";
+import {CIV_BY, CIV_BY_ENTITIES} from "./tmp/byzantine.ts";
 
 function App() {
     //const {twitch, isAuthorized} = useTwitch();
@@ -17,7 +18,7 @@ function App() {
                 <p>Waiting for Twitch...</p>
             )}
         </div>*/
-        <TechTree />
+        <CivTree civ={CIV_BY} entities={CIV_BY_ENTITIES} />
     );
 }
 
