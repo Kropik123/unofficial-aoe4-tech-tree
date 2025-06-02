@@ -5,7 +5,7 @@ interface Props {
     cost: number,
 }
 
-const getResourceText = (type: ResourceType) => {
+function getResourceText (type: ResourceType) {
      switch (type) {
         case 'FOOD': return "F";
         case 'WOOD': return "W";
@@ -18,7 +18,7 @@ const getResourceText = (type: ResourceType) => {
     }
 }
 
-const getResourceTextColor = (type: ResourceType) => {
+function getResourceTextColor (type: ResourceType) {
     switch (type) {
         case 'FOOD': return "text-red-500";
         case 'WOOD': return "text-orange-700";

@@ -1,4 +1,4 @@
-export const renderDescription = (description: string) => {
+export function renderDescription (description: string) {
     const normalized = description.replace(/\\n|\/n/g, '\n'); // handle \n or /n
     return normalized.split('\n').map((line, index, arr) => (
         <span key={index}>

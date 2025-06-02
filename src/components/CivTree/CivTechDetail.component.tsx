@@ -5,7 +5,7 @@ interface Props {
     entity: GameEntity,
 }
 
-const getColor = (type: GameEntityType) => {
+function getColor (type: GameEntityType) {
     switch (type) {
         case 'GENERAL': return 'bg-bluegray-700';
         case 'WORKER': return 'bg-gray-700';

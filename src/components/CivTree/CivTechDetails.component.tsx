@@ -5,7 +5,7 @@ interface Props {
     entity: GameEntity,
 }
 
-const getColor = (type: GameEntityType) => {
+function getColor (type: GameEntityType) {
     switch (type) {
         case 'GENERAL': return 'bg-bluegray-800';
         case 'WORKER': return 'bg-gray-800';
@@ -15,7 +15,7 @@ const getColor = (type: GameEntityType) => {
     }
 };
 
-const renderSubEntities = (entity: GameEntity) => {
+function renderSubEntities (entity: GameEntity) {
     // Group by baseId
     const grouped: Record<string, GameEntity[]> = {};
     entity.subEntities.forEach(e => {

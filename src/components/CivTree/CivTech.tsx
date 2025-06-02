@@ -8,7 +8,7 @@ interface Props {
     entity: GameEntity
 }
 
-const getColor = (type: GameEntityType) => {
+function getColor(type: GameEntityType) {
     switch (type) {
         case 'GENERAL': return 'bg-bluegray-900'
         case 'WORKER': return 'bg-gray-900'
@@ -18,7 +18,7 @@ const getColor = (type: GameEntityType) => {
     }
 }
 
-const renderPlaceholders = (age: number) => {
+function renderPlaceholders(age: number) {
     const placeholderElement = <div className={"col-3 border-right-1 border-yellow-200"}/>
     const placeholders = []
     for (let i = 0; i < age - 1; i++) {
@@ -27,7 +27,7 @@ const renderPlaceholders = (age: number) => {
     return placeholders
 }
 
-const calculateColCount = (age: number) => {
+function calculateColCount(age: number) {
     return 15 - (age * 3)
 }
 
