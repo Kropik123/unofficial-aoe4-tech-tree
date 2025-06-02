@@ -1,5 +1,5 @@
 import CivTechDetail from "./CivTechDetail.component.tsx";
-import type {GameEntity, GameEntityType} from "./types.ts";
+import type {GameEntity, GameEntityType} from "../../types/game.ts";
 
 interface Props {
     entity: GameEntity,

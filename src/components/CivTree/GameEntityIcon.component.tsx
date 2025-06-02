@@ -1,7 +1,7 @@
 import {Image} from "primereact/image";
 import CustomTooltip from "../CustomTooltip/CustomtTooltip.component.tsx";
 import GameEntityDetails from "./GameEntityDetails.component.tsx";
-import type {GameEntity} from "./types.ts";
+import type {GameEntity} from "../../types/game.ts";
 
 interface Props {
     entity: GameEntity,

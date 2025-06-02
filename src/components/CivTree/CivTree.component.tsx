@@ -1,4 +1,4 @@
-import type {Civ, GameEntity} from "./types.ts";
+import type {Civ, GameEntity} from "../../types/game.ts";
 import CivTech from "./CivTech.tsx";
 
 interface Props {

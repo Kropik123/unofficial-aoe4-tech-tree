@@ -1,4 +1,4 @@
-import type {Civ, GameEntity} from "../components/CivTree/types.ts";
+import type {Civ, GameEntity} from "../types/game.ts";
 
 export const CIV_BY: Civ = {
     id: "by",

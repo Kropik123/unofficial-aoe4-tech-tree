@@ -1,6 +1,6 @@
 import {Image} from "primereact/image";
 import ResourceCost from "./ResourceCost.component.tsx";
-import type {GameEntity} from "./types.ts";
+import type {GameEntity} from "../../types/game.ts";
 import {renderDescription} from "./util.tsx";
 
 interface Props {
