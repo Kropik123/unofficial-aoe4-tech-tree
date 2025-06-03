@@ -4,7 +4,7 @@ import type {
     AoE4WorldCosts,
     AoE4WorldTechnology,
     AoE4WorldUnit
-} from "../api/apiTypes.ts";
+} from "../api/AoE4WorldData/types.ts";
 
 /**
  * + Reads "allBuildings", "allTechnologies" and "allUnits" of AoE4WorldData API

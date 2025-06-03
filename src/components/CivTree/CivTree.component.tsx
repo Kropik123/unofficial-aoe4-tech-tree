@@ -1,6 +1,6 @@
 import type {GameEntity} from "../../types/game.ts";
 import CivTech from "./CivTech.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {CIV_KEY_TO_NAME} from "../../lib/civKeyMapping.ts";
 import {Dropdown} from "primereact/dropdown";
 
@@ -14,13 +14,16 @@ interface CivTitle {
 }
 
 function CivTree({civs}: Props) {
-
-    const [selectedCivKey, setSelectedCivKey] = useState<string | null>(civs.keys().next().value ?? null)
+    const [selectedCivKey, setSelectedCivKey] = useState<string>()
 
     const civTitles: CivTitle[] = Array.from(civs.keys())
         .map(k => ({ key: k, name: CIV_KEY_TO_NAME.get(k) ?? k }))
         .sort((a, b) => a.name.localeCompare(b.name));
     const civBuildings = selectedCivKey ? civs.get(selectedCivKey) : []
+
+    useEffect(() => {
+        setSelectedCivKey(civs.keys().next().value ?? undefined);
+    }, [civs]);
 
     return (
         <div className="flex flex-column p-2">
