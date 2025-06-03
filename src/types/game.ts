@@ -7,6 +7,7 @@ export interface GameEntity {
     baseId: string,
     type: GameEntityType
     name: string,
+    attribName: string,
     age: GameEntityAge,
     description: string,
     displayClass: string,
@@ -14,6 +15,7 @@ export interface GameEntity {
     icon: string,
     costs: ResourceCosts,
     subEntities: GameEntity[],
+    predecessor?: GameEntity,
 }
 
 export interface ResourceCosts {

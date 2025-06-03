@@ -10,7 +10,7 @@ interface Props {
 function GameEntityDetails({entity}: Props) {
 
     return (
-        <div className="flex flex-column bg-bluegray-800 p-2 shadow-4">
+        <div className="flex flex-column bg-bluegray-800 p-2 shadow-6" style={{minWidth: "300px", minHeight: "200px"}}>
             <div className={"grid"}>
                 <div className={"col-2"}>
                     <div className={"bg-white-alpha-10"} style={{width: "45px"}}>

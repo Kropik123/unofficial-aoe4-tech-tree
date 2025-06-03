@@ -1,4 +1,4 @@
-import React, { useState, cloneElement } from 'react';
+import React, { useState, useRef, useLayoutEffect, cloneElement } from 'react';
 import type { ReactNode, ReactElement, MouseEvent } from 'react';
 
 interface CustomTooltipProps {
@@ -16,11 +16,34 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
                                                      }) => {
     const [visible, setVisible] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
+    const tooltipRef = useRef<HTMLDivElement | null>(null);
+    const [tooltipSize, setTooltipSize] = useState({ width: 0, height: 0 });
+
+    useLayoutEffect(() => {
+        if (tooltipRef.current) {
+            const rect = tooltipRef.current.getBoundingClientRect();
+            setTooltipSize({ width: rect.width, height: rect.height });
+        }
+    }, [visible, content]);
 
     const handleMouseEnter = () => setVisible(true);
     const handleMouseLeave = () => setVisible(false);
     const handleMouseMove = (event: MouseEvent) => {
-        setPosition({ x: event.clientX + offsetX, y: event.clientY + offsetY });
+        const padding = 8; // padding from edge
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        let x = event.clientX + offsetX;
+        let y = event.clientY + offsetY;
+
+        if (x + tooltipSize.width + padding > screenWidth) {
+            x = screenWidth - tooltipSize.width - padding;
+        }
+        if (y + tooltipSize.height + padding > screenHeight) {
+            y = screenHeight - tooltipSize.height - padding;
+        }
+
+        setPosition({ x, y });
     };
 
     const triggerElement = cloneElement(children, {
@@ -35,6 +58,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
             {triggerElement}
             {visible && (
                 <div
+                    ref={tooltipRef}
                     className="p-tooltip p-component"
                     style={{
                         position: 'fixed',

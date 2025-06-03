@@ -13,19 +13,28 @@ function getColor (type: GameEntityType) {
         case 'TECHNOLOGY': return 'bg-teal-700';
         case 'LANDMARK': return 'bg-gray-800';
     }
-};
+}
 
-function renderSubEntities (entity: GameEntity) {
-    // Group by baseId
+function getUpgradeRoot(entity: GameEntity): GameEntity {
+    let current = entity;
+    while (current.predecessor) {
+        current = current.predecessor;
+    }
+    return current;
+}
+
+function renderSubEntities(entity: GameEntity) {
     const grouped: Record<string, GameEntity[]> = {};
+
     entity.subEntities.forEach(e => {
-        if (!grouped[e.baseId]) {
-            grouped[e.baseId] = [];
+        const root = getUpgradeRoot(e);
+        const key = root.id;
+        if (!grouped[key]) {
+            grouped[key] = [];
         }
-        grouped[e.baseId].push(e);
+        grouped[key].push(e);
     });
 
-    // Map from building age to column size and applicable ages
     const ageConfig: Record<number, { colClass: string; ages: number[] }> = {
         1: { colClass: 'col-3', ages: [1, 2, 3, 4] },
         2: { colClass: 'col-4', ages: [2, 3, 4] },
@@ -35,26 +44,28 @@ function renderSubEntities (entity: GameEntity) {
 
     const { colClass, ages } = ageConfig[entity.age];
 
-    console.log(grouped)
-
     return (
-        <div className="w-full">
-            {Object.values(grouped).map(group => (
-                <div className="grid grid-nogutter mb-5" key={group[0].baseId}>
-                    {ages.map(age => {
-                        const entry = group.find(e => e.age === age);
-                        console.log(entry)
-                        return (
-                            <div className={colClass} key={age}>
-                                {entry && <CivTechDetail entity={entry}/>}
-                            </div>
-                        );
-                    })}
-                </div>
-            ))}
+        <div className="w-full space-y-4">
+            {Object.values(grouped).map(group => {
+                // Sort group by age for consistent left-to-right order
+                const sortedGroup = [...group].sort((a, b) => a.age - b.age);
+
+                return (
+                    <div className="grid grid-nogutter" key={group[0].id}>
+                        {ages.map(age => {
+                            const entry = sortedGroup.find(e => e.age === age);
+                            return (
+                                <div className={colClass} key={age}>
+                                    {entry && <CivTechDetail entity={entry} />}
+                                </div>
+                            );
+                        })}
+                    </div>
+                );
+            })}
         </div>
     );
-};
+}
 
 function CivTechDetails({entity}: Props) {
     return (

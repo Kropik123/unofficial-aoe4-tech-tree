@@ -19,10 +19,9 @@ function getColor(type: GameEntityType) {
 }
 
 function renderPlaceholders(age: number) {
-    const placeholderElement = <div className={"col-3 border-right-1 border-yellow-200"}/>
     const placeholders = []
     for (let i = 0; i < age - 1; i++) {
-        placeholders.push(placeholderElement)
+        placeholders.push(<div key={`placeholder-${i}`} className={"col-3 border-right-1 border-yellow-200"}/>)
     }
     return placeholders
 }
@@ -32,7 +31,8 @@ function calculateColCount(age: number) {
 }
 
 function CivTech({entity}: Props) {
-    const [setShowDetails, setSetShowDetails] = useState<boolean>(false)
+    const [showDetails, setShowDetails] = useState<boolean>(false)
+    const hasSubEntities = entity.subEntities.length > 0
 
     return (
         <div className="test grid m-0 flex-row bg-bluegray-900 border-1 border-yellow-200">
@@ -40,13 +40,15 @@ function CivTech({entity}: Props) {
             <div className={`col-${calculateColCount(entity.age)} p-0`}>
                 <div className={"flex flex-column"}>
                     <div className={`flex flex-row align-content-center gap-1 ${getColor(entity.type)}`}>
-                        <Button className={"text-yellow-200 text-sm"} icon="pi pi-caret-up" text aria-label="Collapse" onClick={() => setSetShowDetails(prev => !prev)} />
+                        {hasSubEntities
+                            ? <Button className={"text-yellow-200 text-sm"} icon="pi pi-caret-up" text aria-label="Collapse" onClick={() => setShowDetails(prev => !prev)} />
+                            : <div className={"mr-6"} />}
                         <GameEntityIcon entity={entity} width={32} height={32} />
                         <div className={"flex flex-column justify-content-center ml-1 text-gray-200 text-lg p-1 text-center uppercase"}>
                             {entity.name}
                         </div>
                     </div>
-                    {setShowDetails && <CivTechDetails entity={entity}/>}
+                    {hasSubEntities && showDetails && <CivTechDetails entity={entity}/>}
                 </div>
             </div>
         </div>
