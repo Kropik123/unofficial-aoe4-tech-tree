@@ -1,19 +1,18 @@
 import './App.css'
 //import {useTwitch} from "./hooks/useTwitch.ts";
-import CivTree from "./components/CivTree/CivTree.component.tsx";
-import {CIV_BY} from "./tmp/byzantine.ts";
 import allBuildingsJson from './tmp/allBuildings.json';
 import allTechnologiesJson from './tmp/allTechnologies.json';
 import allUnitsJson from './tmp/allUnits.json';
 import type {AoE4WorldBuilding, AoE4WorldTechnology, AoE4WorldUnit} from "./api/apiTypes.ts";
-import {parseAoE4WorldData} from "./lib/parseCivData.ts";
+import {parseAoE4WorldData} from "./lib/civDataParsing.ts";
+import CivTree from "./components/CivTree/CivTree.component.tsx";
 
 function App() {
     //const {twitch, isAuthorized} = useTwitch();
     const aoe4WorldBuildings = allBuildingsJson.data as AoE4WorldBuilding[]
     const aoe4WorldTechnologies = allTechnologiesJson.data as AoE4WorldTechnology[]
     const aoe4WorldUnits = allUnitsJson.data as AoE4WorldUnit[]
-    const civToBuildings = parseAoE4WorldData(aoe4WorldBuildings, aoe4WorldTechnologies, aoe4WorldUnits)
+    const civs = parseAoE4WorldData(aoe4WorldBuildings, aoe4WorldTechnologies, aoe4WorldUnits)
 
     return (
         /*<div>
@@ -27,7 +26,9 @@ function App() {
                 <p>Waiting for Twitch...</p>
             )}
         </div>*/
-        <CivTree civ={CIV_BY} entities={civToBuildings.get("by") ?? []} />
+        <div>
+            <CivTree civs={civs} />
+        </div>
     );
 }
 

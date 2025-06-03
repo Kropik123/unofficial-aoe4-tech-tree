@@ -45,7 +45,7 @@ function renderSubEntities(entity: GameEntity) {
     const { colClass, ages } = ageConfig[entity.age];
 
     return (
-        <div className="w-full space-y-4">
+        <div className="w-full">
             {Object.values(grouped).map(group => {
                 // Sort group by age for consistent left-to-right order
                 const sortedGroup = [...group].sort((a, b) => a.age - b.age);

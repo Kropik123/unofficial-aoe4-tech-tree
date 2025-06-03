@@ -16,7 +16,7 @@ function getColor (type: GameEntityType) {
 }
 
 function CivTechDetail({entity}: Props) {
-    return (<div className={"flex flex-row justify-content-center align-content-center"}>
+    return (<div className={"flex flex-row justify-content-center align-content-center p-2"}>
         <div className={"flex flex-column justify-content-center"}>
             <div className={"flex flex-row justify-content-center"}>
                 <div className={`${getColor(entity.type)}`} style={{width: "45px", height: "45px"}}>

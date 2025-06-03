@@ -35,13 +35,13 @@ function CivTech({entity}: Props) {
     const hasSubEntities = entity.subEntities.length > 0
 
     return (
-        <div className="test grid m-0 flex-row bg-bluegray-900 border-1 border-yellow-200">
+        <div className="grid grid-nogutter flex-row bg-bluegray-900 border-1 border-yellow-200">
             {renderPlaceholders(entity.age)}
             <div className={`col-${calculateColCount(entity.age)} p-0`}>
                 <div className={"flex flex-column"}>
                     <div className={`flex flex-row align-content-center gap-1 ${getColor(entity.type)}`}>
                         {hasSubEntities
-                            ? <Button className={"text-yellow-200 text-sm"} icon="pi pi-caret-up" text aria-label="Collapse" onClick={() => setShowDetails(prev => !prev)} />
+                            ? <Button className={"text-yellow-200 text-sm"} icon={`pi pi-caret-${showDetails ? 'right' : 'up'}`} text aria-label="Collapse" onClick={() => setShowDetails(prev => !prev)} />
                             : <div className={"mr-6"} />}
                         <GameEntityIcon entity={entity} width={32} height={32} />
                         <div className={"flex flex-column justify-content-center ml-1 text-gray-200 text-lg p-1 text-center uppercase"}>
