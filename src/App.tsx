@@ -1,5 +1,4 @@
 import './App.css'
-//import {useTwitch} from "./hooks/useTwitch.ts";
 import {parseAoE4WorldData} from "./lib/civDataParsing.ts";
 import CivTree from "./components/CivTree/CivTree.component.tsx";
 import {useEffect, useState} from "react";
@@ -8,15 +7,29 @@ import {getAllBuildings} from "./api/AoE4WorldData/buildings.ts";
 import {getAllTechnologies} from "./api/AoE4WorldData/technologies.ts";
 import {getAllUnits} from "./api/AoE4WorldData/units.ts";
 import {ProgressSpinner} from "primereact/progressspinner";
+import {useTwitch} from "./hooks/useTwitch.ts";
 
 function App() {
-    //const {twitch, isAuthorized} = useTwitch();
+    const {twitch, isAuthorized} = useTwitch();
 
     const [loading, setLoading] = useState<boolean>(false);
     const [civs, setCivs] = useState<Map<string, GameEntity[]>>(new Map());
 
     useEffect(() => {
+        if (twitch) {
+            if (isAuthorized) {
+                console.log("Connected to Twitch Extension (Authorized)")
+            } else {
+                console.log("Connected to Twitch Extension (Not Authorized)")
+            }
+        } else {
+            console.log("Waiting for Twitch...")
+        }
+    });
+
+    useEffect(() => {
         const fetchData = async () => {
+            console.log("Fetching data ...")
             setLoading(true);
             try {
                 const [allBuildings, allTechnologies, allUnits] = await Promise.all([
@@ -26,6 +39,7 @@ function App() {
                 ]);
                 const parsedData = parseAoE4WorldData(allBuildings, allTechnologies, allUnits)
                 setCivs(parsedData)
+                console.log("Finished fetching data")
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -33,8 +47,10 @@ function App() {
             }
         };
 
-        fetchData().catch(console.error)
-    }, [])
+        if (twitch) {
+            fetchData().catch(console.error)
+        }
+    }, [twitch])
 
     return (
         /*<div>
