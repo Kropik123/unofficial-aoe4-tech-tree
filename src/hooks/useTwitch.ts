@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type {TwitchExt} from "../types/twitch";
 
 export function useTwitch() {
     const [twitch, setTwitch] = useState<TwitchExt | null>(null);

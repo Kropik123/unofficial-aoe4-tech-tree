@@ -8,7 +8,7 @@ declare global {
     }
 }
 
-interface TwitchAuth {
+export interface TwitchAuth {
     clientId: string;
     channelId: string;
     userId: string;
@@ -16,7 +16,7 @@ interface TwitchAuth {
     // add more fields if needed
 }
 
-interface TwitchExt {
+export interface TwitchExt {
     onAuthorized(callback: (auth: TwitchAuth) => void): void;
     onVisibilityChanged(callback: (isVisible: boolean, context: string) => void): void;
     // add other Twitch SDK methods you use
