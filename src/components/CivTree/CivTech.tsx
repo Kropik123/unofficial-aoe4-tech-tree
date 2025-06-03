@@ -5,7 +5,7 @@ import CivTechDetails from "./CivTechDetails.component.tsx";
 import type {GameEntity, GameEntityType} from "../../types/game.ts";
 
 interface Props {
-    entity: GameEntity
+    entity: GameEntity,
 }
 
 function getColor(type: GameEntityType) {

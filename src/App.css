@@ -1,0 +1,18 @@
+/* Apply global font and smoothing */
+body {
+    font-family: 'Crimson Pro', Georgia, 'Times New Roman', Times, serif;
+}
+
+/* style links */
+a {
+    color: #ac7e0d;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/*  PrimeReact base overrides */
+.p-button {
+    font-family: inherit;
+}

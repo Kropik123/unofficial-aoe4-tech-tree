@@ -93,8 +93,8 @@ function sortGameEntities(entities: GameEntity[]): GameEntity[] {
             return priorityA - priorityB;
         }
 
-        // Rule 4: Final tie-breaker: attribName alphabetically
-        return a.attribName.localeCompare(b.attribName);
+        // Rule 4: Final tie-breaker: name alphabetically
+        return a.name.localeCompare(b.name);
     });
 }
 

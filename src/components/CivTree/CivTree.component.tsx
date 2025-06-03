@@ -14,18 +14,18 @@ interface CivTitle {
 }
 
 function CivTree({civs}: Props) {
-    const civTitles: CivTitle[] = Array.from(civs.keys())
-        .map(k => {return {key: k, name: CIV_KEY_TO_NAME.get(k) ?? k}})
 
     const [selectedCivKey, setSelectedCivKey] = useState<string | null>(civs.keys().next().value ?? null)
+
+    const civTitles: CivTitle[] = Array.from(civs.keys())
+        .map(k => ({ key: k, name: CIV_KEY_TO_NAME.get(k) ?? k }))
+        .sort((a, b) => a.name.localeCompare(b.name));
     const civBuildings = selectedCivKey ? civs.get(selectedCivKey) : []
 
     return (
         <div className="flex flex-column p-2">
-            <div className="flex flex-row justify-content-between p-2">
-                <div>Collapsed ???</div>
+            <div className="flex flex-row justify-content-end p-2">
                 <Dropdown
-                    className={""}
                     style={{width: "240px"}}
                     value={selectedCivKey}
                     onChange={(e) => setSelectedCivKey(e.value)}
