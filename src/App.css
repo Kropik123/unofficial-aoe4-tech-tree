@@ -1,3 +1,10 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto; /* or scroll */
+}
+
 /* Apply global font and smoothing */
 body {
     font-family: 'Crimson Pro', Georgia, 'Times New Roman', Times, serif;

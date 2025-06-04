@@ -7,29 +7,14 @@ import {getAllBuildings} from "./api/AoE4WorldData/buildings.ts";
 import {getAllTechnologies} from "./api/AoE4WorldData/technologies.ts";
 import {getAllUnits} from "./api/AoE4WorldData/units.ts";
 import {ProgressSpinner} from "primereact/progressspinner";
-import {useTwitch} from "./hooks/useTwitch.ts";
 
 function App() {
-    const {twitch, isAuthorized} = useTwitch();
-
     const [loading, setLoading] = useState<boolean>(false);
     const [civs, setCivs] = useState<Map<string, GameEntity[]>>(new Map());
 
     useEffect(() => {
-        if (twitch) {
-            if (isAuthorized) {
-                console.log("Connected to Twitch Extension (Authorized)")
-            } else {
-                console.log("Connected to Twitch Extension (Not Authorized)")
-            }
-        } else {
-            console.log("Waiting for Twitch...")
-        }
-    });
-
-    useEffect(() => {
         const fetchData = async () => {
-            console.log("Fetching data ...")
+            console.log("Fetching aoe4-world-data ...")
             setLoading(true);
             try {
                 const [allBuildings, allTechnologies, allUnits] = await Promise.all([
@@ -39,31 +24,18 @@ function App() {
                 ]);
                 const parsedData = parseAoE4WorldData(allBuildings, allTechnologies, allUnits)
                 setCivs(parsedData)
-                console.log("Finished fetching data")
+                console.log("Finished fetching aoe4-world-data")
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching aoe4-world-data:', error);
             } finally {
                 setLoading(false);
             }
         };
 
-        if (twitch) {
-            fetchData().catch(console.error)
-        }
-    }, [twitch])
+        fetchData().catch(console.error)
+    }, [])
 
     return (
-        /*<div>
-            {twitch ? (
-                isAuthorized ? (
-                    <p>Connected to Twitch Extension (Authorized)</p>
-                ) : (
-                    <p>Connected to Twitch Extension (Not Authorized)</p>
-                )
-            ) : (
-                <p>Waiting for Twitch...</p>
-            )}
-        </div>*/
         <div>
             <CivTree civs={civs} />
             {loading && (
