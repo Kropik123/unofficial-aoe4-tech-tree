@@ -43,7 +43,7 @@ This repository hosts a **Tech Tree Viewer** for *Age of Empires 4*, designed as
 
 ## Data Sources
 
-The extension fetches data and images from the public AoE4World API:
+The extension fetches data and images from the AoE4World Data API (https://github.com/aoe4world/data):
 
 - `https://data.aoe4world.com/buildings/all.json`
 - `https://data.aoe4world.com/technologies/all.json`
