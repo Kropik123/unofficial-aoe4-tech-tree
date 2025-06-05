@@ -38,7 +38,7 @@ function GameEntityDetails({entity}: Props) {
                         <i className="pi pi-info-circle"></i>
                         <span>Unique to civilization</span>
                     </div>}
-                    <div className={"text-gray-200 text-sm"}>
+                    <div className={"text-gray-200 text-sm p-1"}>
                         {renderDescription(entity.description)}
                     </div>
                 </div>
