@@ -74,6 +74,8 @@ Created by **Kropik123**.
 
 This project is licensed under the [MIT License](LICENSE).
 
+All data is open source and may be used in your projects, websites, and apps. However, Microsoft owns the copyright to Age of Empires 4. You cannot use this data in commercial contexts except as allowed under Microsoft's Game Content Usage Rules.
+
 > Age Of Empires 4 © Microsoft Corporation.  
 > Unofficial AoE4 Tech Tree was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires 4, and it is not endorsed by or affiliated with Microsoft.
 
