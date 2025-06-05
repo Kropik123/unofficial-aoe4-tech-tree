@@ -69,7 +69,6 @@ The extension fetches data and images from the public AoE4World API:
 ## Credits
 
 Created by **Kropik123**.
-Watch me live on Twitch: [TheRealRodriques](https://twitch.tv/TheRealRodriques)
 
 ---
 
