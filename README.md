@@ -1,7 +1,8 @@
 
 # Unofficial AoE4 Tech Tree
 
-This repository hosts a **Tech Tree Viewer** for *Age of Empires 4*, designed as a Twitch Extension to help viewers explore the different's civilizations  buildings, units and technologies visually.
+This repository hosts a **Tech Tree Viewer** for *Age of Empires 4*.  
+Developed as twitch extension in mind to help viewers explore the different's civilizations  buildings, units and technologies visually.
 
 ---
 
@@ -43,7 +44,7 @@ This repository hosts a **Tech Tree Viewer** for *Age of Empires 4*, designed as
 
 ## Data Sources
 
-The extension fetches data and images from the AoE4World Data API (https://github.com/aoe4world/data):
+The application fetches data and images from the AoE4World Data API (https://github.com/aoe4world/data):
 
 - `https://data.aoe4world.com/buildings/all.json`
 - `https://data.aoe4world.com/technologies/all.json`
