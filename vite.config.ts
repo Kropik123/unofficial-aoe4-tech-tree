@@ -10,16 +10,10 @@ export default defineConfig({
     host: 'localhost',
   },
   build: {
-    minify: false,         // no minification for readability (needed according to twitch guidelines)
+    minify: false,         // no minification for readability
     sourcemap: false,
     rollupOptions: {
-      external: ['react', 'react-dom', 'primereact'],
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          primereact: 'PrimeReact'
-        },
         manualChunks(id) {
           if (id.includes('node_modules')) {
             // Put all node_modules code in a separate chunk (vendor.js)
