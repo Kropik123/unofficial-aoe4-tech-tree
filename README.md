@@ -1,54 +1,82 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Unofficial AoE4 Tech Tree
 
-Currently, two official plugins are available:
+This repository hosts a **Tech Tree Viewer** for *Age of Empires 4*, designed as a Twitch Extension to help viewers explore the different's civilizations  buildings, units and technologies visually.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**
+- **TypeScript**
+- **Vite** (build tool)
+- **PrimeReact** & **PrimeFaces** (UI components)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Interactive tech tree visualization
+- Dynamic data fetching from AoE4World API
+- Twitch Extension helper script included for integration as Twitch extension
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## Setup & Development
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## Data Sources
+
+The extension fetches data and images from the public AoE4World API:
+
+- `https://data.aoe4world.com/buildings/all.json`
+- `https://data.aoe4world.com/technologies/all.json`
+- `https://data.aoe4world.com/units/all.json`
+- `https://data.aoe4world.com/images/buildings/{building-id}.png`
+- `https://data.aoe4world.com/images/technologies/{technology-id}.png`
+- `https://data.aoe4world.com/images/units/{unit-id}.png`
+
+---
+
+## Notes
+
+- This project does **not** own or control the AoE4World API or Age of Empires 4 game content.
+- All data is fetched live and validated before display.
+- All data is open source and may be used in your projects, websites, and apps. However, **Microsoft owns the copyright to Age of Empires 4**. You **cannot use this data in commercial contexts** except as allowed under Microsoft's [Game Content Usage Rules](https://www.xbox.com/en-US/developers/rules).
+- Whenever using data from this repository or any Age of Empires 4 media, please ensure you comply with Microsoft's rules.
+
+> Age Of Empires 4 © Microsoft Corporation.  
+> Unofficial AoE4 Tech Tree was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires 4, and it is not endorsed by or affiliated with Microsoft.
+
+---
+
+## Credits
+
+Created by **Kropik123**.
+Watch me live on Twitch: [TheRealRodriques](https://twitch.tv/TheRealRodriques)
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+Feel free to contribute or report issues!
