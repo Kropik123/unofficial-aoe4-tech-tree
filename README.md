@@ -62,9 +62,6 @@ The application fetches data and images from the AoE4World Data API (https://git
 - All data is open source and may be used in your projects, websites, and apps. However, **Microsoft owns the copyright to Age of Empires 4**. You **cannot use this data in commercial contexts** except as allowed under Microsoft's [Game Content Usage Rules](https://www.xbox.com/en-US/developers/rules).
 - Whenever using data from this repository or any Age of Empires 4 media, please ensure you comply with Microsoft's rules.
 
-> Age Of Empires 4 © Microsoft Corporation.  
-> Unofficial AoE4 Tech Tree was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires 4, and it is not endorsed by or affiliated with Microsoft.
-
 ---
 
 ## Credits
@@ -76,6 +73,10 @@ Created by **Kropik123**.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+> Age Of Empires 4 © Microsoft Corporation.  
+> Unofficial AoE4 Tech Tree was created under Microsoft's "Game Content Usage Rules" using assets from Age of Empires 4, and it is not endorsed by or affiliated with Microsoft.
+
 
 ---
 
