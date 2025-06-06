@@ -21,6 +21,8 @@ Developed as twitch extension in mind to help viewers explore the different's ci
 - Dynamic data fetching from AoE4World API
 - Twitch Extension helper script included for integration as Twitch extension
 
+![Showcase of Twitch extension](readmeAssets/showcase_of_twitch_extension.png "Showcase of Twitch extension")
+
 ---
 
 ## Setup & Development
