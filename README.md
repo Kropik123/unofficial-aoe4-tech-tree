@@ -4,6 +4,10 @@
 This repository hosts a **Tech Tree Viewer** for *Age of Empires 4*.  
 Developed as twitch extension in mind to help viewers explore the different's civilizations  buildings, units and technologies visually.
 
+Available for your stream too!  
+https://dashboard.twitch.tv/extensions/sqehvbw87hp47wqzoz88se83d0xlcw-1.0.0  
+![Twitch Discovery](readmeAssets/twitch_discovery.png "Twitch Discovery")
+
 ---
 
 ## Tech Stack
