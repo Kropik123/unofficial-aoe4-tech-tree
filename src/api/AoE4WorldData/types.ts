@@ -1,7 +1,7 @@
 export interface AoE4WorldGameEntity {
     id: string;
     baseId: string;
-    type: "unit" | "building" | "technology";
+    type: "unit" | "building" | "technology" | "upgrade";
     name: string;
     pbgid: number;
     attribName: string;
@@ -132,4 +132,9 @@ export interface AoE4WorldTechnology extends AoE4WorldGameEntity {
     effects: AoE4WorldEffect[];
 }
 
-//export type AoE4WorldEntity = AoE4WorldUnit | AoE4WorldBuilding | AoE4WorldTechnology;
+export interface AoE4WorldUpgrade extends AoE4WorldGameEntity {
+    type: "upgrade";
+    unlocks: string;
+}
+
+//export type AoE4WorldEntity = AoE4WorldUnit | AoE4WorldBuilding | AoE4WorldTechnology | AoE4WorldUpgrade;

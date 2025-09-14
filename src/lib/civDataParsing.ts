@@ -3,7 +3,7 @@ import type {
     AoE4WorldBuilding,
     AoE4WorldCosts,
     AoE4WorldTechnology,
-    AoE4WorldUnit
+    AoE4WorldUnit, AoE4WorldUpgrade
 } from "../api/AoE4WorldData/types.ts";
 
 /**
@@ -13,26 +13,30 @@ import type {
 export function parseAoE4WorldData(
     allBuildings: AoE4WorldBuilding[],
     allTechnologies: AoE4WorldTechnology[],
-    allUnits: AoE4WorldUnit[]
+    allUnits: AoE4WorldUnit[],
+    allUpgrades: AoE4WorldUpgrade[],
 ): Map<string, GameEntity[]> {
     return new Map(collectCivKeysFromBuildings(allBuildings)
-        .map(civ => [civ, parseAndSortDataForCiv(civ, allBuildings, allTechnologies, allUnits)]))
+        .map(civ => [civ, parseAndSortDataForCiv(civ, allBuildings, allTechnologies, allUnits, allUpgrades)]))
 }
 
 function collectCivKeysFromBuildings(buildings: AoE4WorldBuilding[]): string[] {
     return [...new Set(buildings.map(b => b.civs[0]))]
 }
 
-function parseAndSortDataForCiv(civ: string, allBuildings: AoE4WorldBuilding[], allTechnologies: AoE4WorldTechnology[], allUnits: AoE4WorldUnit[]): GameEntity[] {
+function parseAndSortDataForCiv(civ: string, allBuildings: AoE4WorldBuilding[], allTechnologies: AoE4WorldTechnology[], allUnits: AoE4WorldUnit[], allUpgrades: AoE4WorldUpgrade[]): GameEntity[] {
     const buildings = allBuildings.filter(b => b.civs.includes(civ))
     const technologies = allTechnologies.filter(b => b.civs.includes(civ))
     const units = allUnits.filter(b => b.civs.includes(civ))
+    const upgrades = allUpgrades.filter(b => b.civs.includes(civ))
 
     const techsByProducer = mapTechnologiesByProducer(technologies);
     const unitsByProducer = mapUnitsByProducer(units);
+    const upgradesByProducer = mapUpgradesByProducer(upgrades);
 
     const techPredecessors = buildPredecessorMap(technologies);
     const unitPredecessors = buildPredecessorMap(units);
+    const upgradePredecessors = buildPredecessorMap(upgrades);
 
     const entities: GameEntity[] = [];
     const transformedCache = new Map<string, GameEntity>();
@@ -40,10 +44,12 @@ function parseAndSortDataForCiv(civ: string, allBuildings: AoE4WorldBuilding[], 
     for (const building of buildings) {
         const unitList = unitsByProducer.get(building.baseId)?.get(civ) || [];
         const techList = techsByProducer.get(building.baseId)?.get(civ) || [];
+        const upgradeList = upgradesByProducer.get(building.baseId)?.get(civ) || [];
 
         const subEntities: GameEntity[] = [
             ...transformSubEntities(unitList, building.age, unitPredecessors, transformedCache),
             ...transformSubEntities(techList, building.age, techPredecessors, transformedCache),
+            ...transformSubEntities(upgradeList, building.age, upgradePredecessors, transformedCache),
         ];
         const sortedSubEntities = sortGameEntities(subEntities)
 
@@ -134,10 +140,28 @@ function mapTechnologiesByProducer(techs: AoE4WorldTechnology[]): Map<string, Ma
     return map;
 }
 
+function mapUpgradesByProducer(upgrades: AoE4WorldUpgrade[]): Map<string, Map<string, AoE4WorldUpgrade[]>> {
+    const map = new Map<string, Map<string, AoE4WorldUpgrade[]>>();
+    for (const upgrade of upgrades) {
+        const civ = upgrade.civs[0];
+        for (const producer of upgrade.producedBy || []) {
+            if (!map.has(producer)) {
+                map.set(producer, new Map());
+            }
+            const civMap = map.get(producer)!;
+            if (!civMap.has(civ)) {
+                civMap.set(civ, []);
+            }
+            civMap.get(civ)!.push(upgrade);
+        }
+    }
+    return map;
+}
+
 function transformSubEntities(
-    entities: (AoE4WorldUnit | AoE4WorldTechnology)[],
+    entities: (AoE4WorldUnit | AoE4WorldTechnology | AoE4WorldUpgrade)[],
     minAge: number,
-    predecessorMap: Map<string, Map<number, AoE4WorldUnit | AoE4WorldTechnology>>,
+    predecessorMap: Map<string, Map<number, AoE4WorldUnit | AoE4WorldTechnology | AoE4WorldUpgrade>>,
     transformedMap: Map<string, GameEntity> // to avoid cycles
 ): GameEntity[] {
     return entities.map(entity => {
@@ -189,7 +213,7 @@ function mapToType(type: string, classes: string[]): GameEntityType {
         } else if (classes.includes("military")) {
             return "MILITARY"
         }
-    } else if (type === "technology") {
+    } else if (type === "technology" || type === "upgrade") {
         return "TECHNOLOGY"
     } else if (type === "unit") {
         if (classes.includes("worker")) {
@@ -225,7 +249,7 @@ function normalizeAttribName(attribName: string): string {
     return attribName.replace(regex, '');
 }
 
-function buildPredecessorMap<T extends AoE4WorldUnit | AoE4WorldTechnology>(
+function buildPredecessorMap<T extends AoE4WorldUnit | AoE4WorldTechnology | AoE4WorldUpgrade>(
     entities: T[]
 ): Map<string, Map<number, T>> {
     const map = new Map<string, Map<number, T>>();

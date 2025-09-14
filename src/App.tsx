@@ -7,6 +7,7 @@ import {getAllBuildings} from "./api/AoE4WorldData/buildings.ts";
 import {getAllTechnologies} from "./api/AoE4WorldData/technologies.ts";
 import {getAllUnits} from "./api/AoE4WorldData/units.ts";
 import {ProgressSpinner} from "primereact/progressspinner";
+import {getAllUpgrades} from "./api/AoE4WorldData/upgrades.ts";
 
 function App() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -17,12 +18,13 @@ function App() {
             console.log("Fetching aoe4-world-data ...")
             setLoading(true);
             try {
-                const [allBuildings, allTechnologies, allUnits] = await Promise.all([
+                const [allBuildings, allTechnologies, allUnits, allUpgrades] = await Promise.all([
                     getAllBuildings(),
                     getAllTechnologies(),
                     getAllUnits(),
+                    getAllUpgrades(),
                 ]);
-                const parsedData = parseAoE4WorldData(allBuildings, allTechnologies, allUnits)
+                const parsedData = parseAoE4WorldData(allBuildings, allTechnologies, allUnits, allUpgrades)
                 setCivs(parsedData)
                 console.log("Finished fetching aoe4-world-data")
             } catch (error) {
