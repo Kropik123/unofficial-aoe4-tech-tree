@@ -17,4 +17,8 @@ export const CIV_KEY_TO_NAME = new Map<string, string>([
     ["zx", "Zhu Xi's Legacy"],
     ["kt", "Knights Templar"],
     ["hl", "House of Lancaster"],
+    ["gol", "Golden Horde"],
+    ["mac", "Macedonian Dynasty"],
+    ["sen", "Sengoku Daimyo"],
+    ["tug", "Tughlaq Dynasty"],
 ]);
